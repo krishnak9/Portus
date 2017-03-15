@@ -189,3 +189,14 @@ i.fa {
     border-right: 1px solid $primary-colour;
   }
 }
+
+//popover css used in signup page for client side validation
+
+#signup_page .popover{
+    background-color: rgba(0,0,0,0.6);
+    color:white;
+}
+
+#signup_page .popover.right > .arrow:after{
+    border-right-color: rgba(0,0,0,0.6);
+}
