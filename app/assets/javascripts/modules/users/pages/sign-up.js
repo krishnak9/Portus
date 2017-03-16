@@ -1,7 +1,7 @@
 import BaseComponent from '~/base/component';
 
-import { fadeIn } from '~/utils/effects';
 import SignUpForm from '../components/signup-form';
+
 const SIGN_UP_FORM = 'form.new_user';
 
 // UsersSignUpPage component responsible to instantiate
