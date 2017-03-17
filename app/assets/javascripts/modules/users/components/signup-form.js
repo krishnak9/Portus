@@ -30,18 +30,16 @@ class UsersSignUpForm extends BaseComponent {
     const passwordInvalid = !this.$password.val() || this.$password.val().length < 8;
     const passwordConfirmationInvalid = !this.$passwordConfirmation.val() ||
       this.$password.val() !== this.$passwordConfirmation.val();
-    if(passwordConfirmationInvalid) {
-      this.$passwordConfirmation[0].setCustomValidity("Please enter same Password as Above");
+    if (passwordConfirmationInvalid) {
+      this.$passwordConfirmation[0].setCustomValidity('Please enter same Password as Above');
+    } else {
+      this.$passwordConfirmation[0].setCustomValidity('');
     }
-    else {
-      this.$passwordConfirmation[0].setCustomValidity("");
-    }
-    if(passwordInvalid) {
-      this.$password[0].setCustomValidity("Password should be of at least 8 characters minimum.");
-    }
-    else {
-      this.$password[0].setCustomValidity("");
-      this.$passwordConfirmation.attr("pattern", this.$password.val());
+    if (passwordInvalid) {
+      this.$password[0].setCustomValidity('Password should be of at least 8 characters minimum.');
+    } else {
+      this.$password[0].setCustomValidity('');
+      this.$passwordConfirmation.attr('pattern', this.$password.val());
     }  
     if (passwordInvalid || passwordConfirmationInvalid || emailInvalid || usernameInvalid) {
       this.$submit.attr('disabled', true);
