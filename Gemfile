@@ -97,6 +97,7 @@ unless packaging?
     gem "webmock", "~> 2.3.2", require: false
     gem "simplecov", require: false
     gem "capybara"
+    gem "capybara-webkit"
     gem "poltergeist", require: false
     gem "json-schema"
     gem "timecop"

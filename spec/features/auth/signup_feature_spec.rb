@@ -148,9 +148,9 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
-    click_button("Create account")
+    page.execute_script('$(".user_username").trigger("focusout")')
 
-    find_button("Create account")[:disabled].should eq "disabled"
+    find_button("submit_btn")[:disabled].should eq "disabled"
   end
 
   scenario "If there are users on the system, and can move through sign_in and sign_up" do
