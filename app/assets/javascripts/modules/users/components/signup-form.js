@@ -40,7 +40,7 @@ class UsersSignUpForm extends BaseComponent {
     } else {
       this.$password[0].setCustomValidity('');
       this.$passwordConfirmation.attr('pattern', this.$password.val());
-    }  
+    }
     if (passwordInvalid || passwordConfirmationInvalid || emailInvalid || usernameInvalid) {
       this.$submit.attr('disabled', true);
     } else {
