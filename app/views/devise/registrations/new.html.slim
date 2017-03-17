@@ -1,14 +1,14 @@
 section.sign-up class=(@have_users ? '' : 'first-user')
-  .center-panel#signup_page
+  .center-panel
     .col-md-4.col-sm-2.col-xs-1
     .col-md-4.col-sm-8.col-xs-10.text-center
       = render 'shared/notifications'
       = image_tag 'layout/portus-logo-login-page.png', class: 'login-picture'
       = form_for(resource, as: resource_name, url: { action: 'create' }, :html => {:autocomplete => "off"}) do |f|
-        = f.text_field :username, class: 'form-control input-lg', placeholder: 'Username', required: true, autofocus: true, rel: 'popover'
-        = f.email_field :email, class: 'form-control input-lg first', placeholder: 'Email', required: true, rel: 'popover'
-        = f.password_field :password, class: 'form-control input-lg', placeholder: 'Password (8 characters min.)', required: true, rel: 'popover'
-        = f.password_field :password_confirmation, class: 'form-control input-lg last', placeholder: 'Password again', required: true, rel: 'popover'
+        = f.text_field :username, class: 'form-control input-lg', placeholder: 'Username', required: true, autofocus: true
+        = f.email_field :email, class: 'form-control input-lg first', placeholder: 'Email', required: true 
+        = f.password_field :password, class: 'form-control input-lg', placeholder: 'Password (8 characters min.)', required: true 
+        = f.password_field :password_confirmation, class: 'form-control input-lg last', placeholder: 'Password again', required: true
 
         - if !@admin && @first_user_admin
           = f.hidden_field :admin, value: true
@@ -21,70 +21,3 @@ section.sign-up class=(@have_users ? '' : 'first-user')
             | Create admin
         - if @have_users
           .text-center = link_to 'I already have an account. Login.', new_user_session_path, class: 'btn btn-link'
-javascript:
-  $( document ).ready(function() {
-    $('#user_username').focusout(function (){
-       if($(this).val()==''){
-         $(this).attr('data-content',"Username field is required.")
-         $(this).popover('show');
-       }
-       else{
-         $(this).popover('hide');
-       }
-       
-    })
-
-    $('#user_email').focusout(function (){
-       if($('#user_email').val()=='') {
-         $('#submit_btn').prop('disabled', true);
-         $(this).attr('data-content',"Email address is required.")
-         $('#user_email').popover('show');
-       }
-       else{
-         var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;  
-         if($('#user_email').val().match(mailformat)){
-           console.log("success");
-           $('#submit_btn').prop('disabled', false);
-           $('#user_email').popover('hide');
-         }
-         else{
-           
-            $('#submit_btn').prop('disabled', true);
-            $(this).attr('data-content',"Email address entered is not a valid email address.")
-            $('#user_email').popover('show');
-         }
-       } 
-    })
-
-    $('#user_password').focusout(function (){
-       if($(this).val().length<8){
-         $('#submit_btn').prop('disabled', true);
-         $(this).attr('data-content',"Minimum 8 characters are required to be a valid Password.")
-         $(this).popover('show');
-         $('#user_password_confirmation').prop('disabled', true);
-       }
-       else{
-         $('#user_password_confirmation').prop('disabled', false);
-         $(this).popover('hide');
-       }
-    })
-
-    $('#user_password_confirmation').focusout(function (){
-       if($('#user_password').val()!=$(this).val()){
-         $('#submit_btn').prop('disabled', true);
-         $(this).attr('data-content',"Passwords doesn't match.Please enter same password as above.")
-         $(this).popover('show');
-       }
-       else{
-         $('#submit_btn').prop('disabled', false);
-         $(this).popover('hide');
-       }
-    })
-    $('#user_password_confirmation').change(function (){
-       if($('#user_password').val()==$(this).val()){
-         $('#submit_btn').prop('disabled', false);
-         $(this).popover('hide');
-       }
-    })
-  });
- 
