@@ -13,6 +13,7 @@ class UsersSignUpPage extends BaseComponent {
   }
 
   mount() {
+
   	fadeIn(this.$el);
     this.signupForm = new SignUpForm(this.$signupForm);
   }

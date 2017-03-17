@@ -25,17 +25,15 @@ class UsersSignUpForm extends BaseComponent {
   }
 
   onfocusout() {
-    const mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
-    const usernameInvalid = !this.$username
-    const emailInvalid = !this.$userEmail.val().match(mailformat)
-    const passwordInvalid = !this.$password.val() || this.$password.val()<8;
+    var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const usernameInvalid = !this.$username;
+    const emailInvalid = !this.$userEmail.val().match(mailformat);
+    const passwordInvalid = !this.$password.val() || this.$password.val() < 8;
     const passwordConfirmationInvalid = !this.$passwordConfirmation.val() ||
       this.$password.val() !== this.$passwordConfirmation.val();
-     
     if (passwordInvalid || passwordConfirmationInvalid || emailInvalid || usernameInvalid) {
-      this.$submit.attr('disabled',true);
-    } 
-    else {
+      this.$submit.attr('disabled', true);
+    } else {
       this.$submit.removeAttr('disabled');
     }
   }
