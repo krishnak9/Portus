@@ -150,7 +150,7 @@ feature "Signup feature" do
     fill_in "user_password_confirmation", with: "532"
     click_button("Create account")
 
-    expect(page).to have_button('Create account', disabled: true)
+    page.should have_css("#submit_btn[disabled]") 
   end
 
   scenario "If there are users on the system, and can move through sign_in and sign_up" do
