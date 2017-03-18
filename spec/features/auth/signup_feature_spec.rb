@@ -148,7 +148,7 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
-    
+    wait_for_effect_on("user_username")
     disabled?("#submit_btn")
     
   end
