@@ -143,14 +143,14 @@ feature "Signup feature" do
                                   text: 'Password confirmation doesn\'t match Password')
   end
 
-  scenario "Submit Button gets disabled when any field is filled wrong" do
+  scenario "Submit Button gets disabled when any field is filled wrong", js: true do
     fill_in "user_username", with: user.username
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
-    page.execute_script('$(".user_username").trigger("focusout")')
-
-    find_button("submit_btn")[:disabled].should eq "disabled"
+    
+    disabled?("#submit_btn")
+    
   end
 
   scenario "If there are users on the system, and can move through sign_in and sign_up" do
