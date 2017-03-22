@@ -6,8 +6,6 @@ feature "Signup feature" do
     APP_CONFIG["first_user_admin"] = { "enabled" => true }
     APP_CONFIG["signup"]           = { "enabled" => true }
     visit new_user_registration_url
-    wait_for_ajax
-    wait_for_effect_on("user_username")
   end
 
   let!(:registry) { create(:registry) }
@@ -150,7 +148,7 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
-    wait_for_effect_on("user_username")
+    expect(page).to have_button('submit_btn', disabled: true)
     
   end
 
