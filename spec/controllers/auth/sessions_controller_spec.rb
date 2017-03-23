@@ -1,6 +1,7 @@
 require "rails_helper"
 
 describe Auth::SessionsController do
+  render_views
   describe "POST #create" do
     before :each do
       request.env["devise.mapping"] = Devise.mappings[:user]
