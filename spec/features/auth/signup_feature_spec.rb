@@ -144,12 +144,12 @@ feature "Signup feature" do
   end
 
   scenario "Submit Button gets disabled when any field is filled wrong", js: true do
-    wait_until
-    fill_in "user_username", with: user.username, wait: 10
-    fill_in "user_email", with: "gibberish", wait: 10
-    fill_in "user_password", with: "12341234", wait:10
-    fill_in "user_password_confirmation", with: "532", wait:10
-    page.execute_script "$('#submit_btn').trigger('focusout')"
+    find("#user_username").fill user.username
+    fill_in "user_email", with: "gibberish"
+    fill_in "user_password", with: "12341234"
+    fill_in "user_password_confirmation", with: "532"
+    page.execute_script "$('#user_username').trigger('focusout')"
+    wait_for_effect_on("#user_username");
     expect(page).to have_button('submit_btn', disabled: true)
     
   end
