@@ -145,6 +145,9 @@ feature "Signup feature" do
 
   scenario "Submit Button gets disabled when any field is filled wrong", js: true do
     visit new_user_registration_url
+    page.execute_script("$('#new_user').show()")
+    page.execute_script("$('#submit_btn').show()")
+    page.execute_script("$('#user_username').show()")
     find("#submit_btn").click
     wait_for_effect_on("#new_user")
     fill_in "Username", with: user.username
