@@ -145,8 +145,7 @@ feature "Signup feature" do
 
   scenario "Submit Button gets disabled when any field is filled wrong", js: true do
     visit new_user_registration_url
-    wait_for_ajax
-    wait_for_effect_on("user_username")
+    wait_for_effect_on("#new_user")
     find("#user_username").fill user.username
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
