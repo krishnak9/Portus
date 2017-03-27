@@ -166,7 +166,7 @@ feature "Signup feature" do
     page.execute_script "$('#user_username').trigger('focusout')"
     wait_for_effect_on("#user_username")
     expect(page).to have_button("submit_btn", disabled: false)
-    
+
   end
 
   scenario "If there are users on the system, and can move through sign_in and sign_up" do
