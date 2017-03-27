@@ -144,15 +144,28 @@ feature "Signup feature" do
   end
 
   scenario "Submit Button gets disabled when any field is filled wrong", js: true do
-    visit '/users/sign_up'
+    visit "/users/sign_up"
     wait_for_effect_on("#new_user")
     fill_in "Username", with: user.username
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
     page.execute_script "$('#user_username').trigger('focusout')"
-    wait_for_effect_on("#user_username");
-    expect(page).to have_button('submit_btn', disabled: false)
+    wait_for_effect_on("#user_username")
+    expect(page).to have_button("submit_btn", disabled: true)
+
+  end
+
+  scenario "Submit Button should be enabled when all fields are filled right", js: true do
+    visit "/users/sign_up"
+    wait_for_effect_on("#new_user")
+    fill_in "Username", with: user.username
+    fill_in "user_email", with: user.email
+    fill_in "user_password", with: user.password
+    fill_in "user_password_confirmation", with: user.password
+    page.execute_script "$('#user_username').trigger('focusout')"
+    wait_for_effect_on("#user_username")
+    expect(page).to have_button("submit_btn", disabled: false)
     
   end
 

@@ -11,7 +11,7 @@ class UsersSignUpPage extends BaseComponent {
   elements() {
     this.$signupForm = this.$el.find(SIGN_UP_FORM);
   }
-  
+
   mount() {
     fadeIn(this.$el);
     this.signupForm = new SignUpForm(this.$signupForm);
