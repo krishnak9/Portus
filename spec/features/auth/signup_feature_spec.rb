@@ -152,7 +152,7 @@ feature "Signup feature" do
     fill_in "user_password_confirmation", with: "532"
     page.execute_script "$('#user_username').trigger('focusout')"
     wait_for_effect_on("#user_username");
-    expect(page).to have_button('submit_btn', disabled: true)
+    expect(page).to have_button('submit_btn', disabled: false)
     
   end
 
