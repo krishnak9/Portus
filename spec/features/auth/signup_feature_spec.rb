@@ -151,7 +151,7 @@ feature "Signup feature" do
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
     page.execute_script "$('#user_username').trigger('focusout')"
-    wait_for_effect_on("#user_username")
+    wait_for_effect_on("#submit_btn")
     expect(page).to have_button("submit_btn", disabled: true)
 
   end
@@ -164,7 +164,7 @@ feature "Signup feature" do
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
     page.execute_script "$('#user_username').trigger('focusout')"
-    wait_for_effect_on("#user_username")
+    wait_for_effect_on("#submit_btn")
     expect(page).to have_button("submit_btn", disabled: false)
 
   end
