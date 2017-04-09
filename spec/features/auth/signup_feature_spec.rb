@@ -145,7 +145,6 @@ feature "Signup feature" do
 
   scenario "Submit Button is disabled on visiting the signup page", js: true do
     visit "/users/sign_up"
-    wait_for_effect_on("#submit_btn")
     expect(page).to have_button("submit_btn", disabled: true)
   end
 

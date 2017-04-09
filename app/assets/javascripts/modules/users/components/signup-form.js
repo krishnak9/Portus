@@ -22,6 +22,7 @@ class UsersSignUpForm extends BaseComponent {
   }
 
   events() {
+    this.$el.on('ready', '#new_user', e => this.allvalidation(e));
     this.$el.on('keyup', PASSWORD_FIELD, e => this.onkeyuppassword(e));
     this.$el.on('keyup', CONFIRMATION_PASSWORD_FIELD, e => this.onkeyuppassword_conf(e));
     this.$el.on('keyup', USERNAME_FIELD, e => this.onkeyupusername(e));
