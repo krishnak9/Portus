@@ -13,7 +13,7 @@ section.sign-up class=(@have_users ? '' : 'first-user')
         - if !@admin && @first_user_admin
           = f.hidden_field :admin, value: true
 
-        button.btn.btn-primary.btn-block.btn-lg#submit_btn type="submit"
+        button.btn.btn-primary.btn-block.btn-lg#submit_btn type="submit" disabled="true"
           i.fa.fa-check
           - if @admin || !@first_user_admin
             | Create account
