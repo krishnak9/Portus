@@ -50,7 +50,7 @@ feature "Signup feature" do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    click_button("Create account")
+    click_button("Create account", disabled: true)
     expect(page).to have_content("Recent activities")
     expect(page).to have_content("Repositories")
     expect(page).to have_content("Welcome! You have signed up successfully. "\
@@ -66,7 +66,7 @@ feature "Signup feature" do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    click_button("Create account")
+    click_button("Create account", disabled: true)
     expect(page).to have_content("Recent activities")
     expect(page).to have_content("Repositories")
     expect(page).to have_content("Welcome! You have signed up successfully. "\
@@ -123,7 +123,7 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    click_button("Create account")
+    click_button("Create account", disabled: true)
     expect(page).to have_content("Email is invalid")
     expect(page).to_not have_content("Create admin")
     expect(current_url).to eq new_user_registration_url
@@ -134,7 +134,7 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
-    click_button("Create account")
+    click_button("Create account", disabled: true)
 
     expect(page).to have_css("#fixed-alert ul")
     expect(page).to have_selector("#fixed-alert ul li", count: 2)
