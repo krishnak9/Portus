@@ -143,11 +143,6 @@ feature "Signup feature" do
                                   text: 'Password confirmation doesn\'t match Password')
   end
 
-  scenario "Submit Button is disabled on visiting the signup page", js: true do
-    visit "/users/sign_up"
-    expect(page).to have_button("submit_btn", disabled: true)
-  end
-
   scenario "Submit Button gets disabled when any field is filled wrong", js: true do
     visit "/users/sign_up"
     wait_for_effect_on("#new_user")
