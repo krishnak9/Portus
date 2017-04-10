@@ -50,7 +50,7 @@ feature "Signup feature" do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    click_button("Create account", disabled: true)
+    click_button("Create account")
     expect(page).to have_content("Recent activities")
     expect(page).to have_content("Repositories")
     expect(page).to have_content("Welcome! You have signed up successfully. "\
@@ -66,7 +66,7 @@ feature "Signup feature" do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    click_button("Create account", disabled: true)
+    click_button("Create account")
     expect(page).to have_content("Recent activities")
     expect(page).to have_content("Repositories")
     expect(page).to have_content("Welcome! You have signed up successfully. "\
@@ -123,7 +123,7 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    click_button("Create account", disabled: true)
+    find_button("Create account")[:disabled].click
     expect(page).to have_content("Email is invalid")
     expect(page).to_not have_content("Create admin")
     expect(current_url).to eq new_user_registration_url
@@ -134,13 +134,18 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
-    click_button("Create account", disabled: true)
+    click_button("Create account")
 
     expect(page).to have_css("#fixed-alert ul")
     expect(page).to have_selector("#fixed-alert ul li", count: 2)
     expect(page).to have_selector("#fixed-alert ul li", text: "Email is invalid")
     expect(page).to have_selector("#fixed-alert ul li",
                                   text: 'Password confirmation doesn\'t match Password')
+  end
+
+  scenario "Submit Button is disabled on visiting the signup page", js: true do
+    visit "/users/sign_up"
+    expect(page).to have_button("submit_btn", disabled: true)
   end
 
   scenario "Submit Button gets disabled when any field is filled wrong", js: true do

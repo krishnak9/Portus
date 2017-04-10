@@ -22,7 +22,6 @@ class UsersSignUpForm extends BaseComponent {
   }
 
   events() {
-    this.$el.on('ready', '#new_user', e => this.allvalidation(e));
     this.$el.on('keyup', PASSWORD_FIELD, e => this.onkeyuppassword(e));
     this.$el.on('keyup', CONFIRMATION_PASSWORD_FIELD, e => this.onkeyuppassword_conf(e));
     this.$el.on('keyup', USERNAME_FIELD, e => this.onkeyupusername(e));
@@ -38,7 +37,11 @@ class UsersSignUpForm extends BaseComponent {
       this.$username_valid = true;
     }
 
-    allvalidation();
+    if (this.$pass_valid && this.$pass_conf_valid && this.$email_valid && this.$username_valid) {
+      this.$submit.removeAttr('disabled');
+    } else {
+      this.$submit.attr('disabled', true);
+    }
   }
 
   onkeyupemail() {
@@ -50,7 +53,11 @@ class UsersSignUpForm extends BaseComponent {
       this.$email_valid = true;
     }
 
-    allvalidation();
+    if (this.$pass_valid && this.$pass_conf_valid && this.$email_valid && this.$username_valid) {
+      this.$submit.removeAttr('disabled');
+    } else {
+      this.$submit.attr('disabled', true);
+    }
   }
 
   onkeyuppassword_conf() {
@@ -65,7 +72,11 @@ class UsersSignUpForm extends BaseComponent {
       this.$pass_conf_valid = true;
     }
 
-    allvalidation();
+    if (this.$pass_valid && this.$pass_conf_valid && this.$email_valid && this.$username_valid) {
+      this.$submit.removeAttr('disabled');
+    } else {
+      this.$submit.attr('disabled', true);
+    }
   }
 
   onkeyuppassword() {
@@ -80,11 +91,7 @@ class UsersSignUpForm extends BaseComponent {
       this.$pass_valid = true;
     }
 
-    allvalidation();
-  }
-
-  allvalidation() {
-    if (this.$pass_valid || this.pass_conf_valid || this.$email_valid || this.$username_valid) {
+    if (this.$pass_valid && this.$pass_conf_valid && this.$email_valid && this.$username_valid) {
       this.$submit.removeAttr('disabled');
     } else {
       this.$submit.attr('disabled', true);
