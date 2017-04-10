@@ -44,7 +44,7 @@ feature "Signup feature" do
     expect(page).to have_css("#user_admin")
   end
 
-  scenario "As a guest I am able to signup" do
+  scenario "As a guest I am able to signup", js: true do
     expect(page).to_not have_content("Create admin")
     fill_in "user_username", with: user.username
     fill_in "user_email", with: user.email
@@ -58,7 +58,7 @@ feature "Signup feature" do
     expect(current_url).to eq root_url
   end
 
-  scenario "As a guest I am able to signup with a weird username" do
+  scenario "As a guest I am able to signup with a weird username", js: true do
     username = user.username + "!"
 
     expect(page).to_not have_content("Create admin")
@@ -118,7 +118,7 @@ feature "Signup feature" do
     expect(page).to_not have_content("Login")
   end
 
-  scenario "As a guest I can see error prohibiting my registration to be completed" do
+  scenario "As a guest I can see error prohibiting my registration to be completed", js: true do
     fill_in "user_username", with: user.username
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: user.password
@@ -129,7 +129,7 @@ feature "Signup feature" do
     expect(current_url).to eq new_user_registration_url
   end
 
-  scenario "Multiple errors are displayed in a list" do
+  scenario "Multiple errors are displayed in a list", js: true do
     fill_in "user_username", with: user.username
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
