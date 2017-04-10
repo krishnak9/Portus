@@ -123,7 +123,7 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    find_button("Create account")[:disabled].click
+    find_button("#submit_btn")[:disabled].click
     expect(page).to have_content("Email is invalid")
     expect(page).to_not have_content("Create admin")
     expect(current_url).to eq new_user_registration_url
