@@ -53,6 +53,9 @@ feature "Signup feature" do
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
     page.execute_script "$('#user_username').trigger('keyup')"
+    page.execute_script "$('#user_email').trigger('keyup')"
+    page.execute_script "$('#user_password').trigger('keyup')"
+    page.execute_script "$('#user_password_confirmation').trigger('keyup')"
     wait_for_effect_on("#submit_btn")
     page.execute_script "$('#submit_btn').click()"
     expect(page).to have_content("Recent activities")
@@ -73,6 +76,9 @@ feature "Signup feature" do
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
     page.execute_script "$('#user_username').trigger('keyup')"
+    page.execute_script "$('#user_email').trigger('keyup')"
+    page.execute_script "$('#user_password').trigger('keyup')"
+    page.execute_script "$('#user_password_confirmation').trigger('keyup')"
     wait_for_effect_on("#submit_btn")
     page.execute_script "$('#submit_btn').click()"
     expect(page).to have_content("Recent activities")
@@ -138,7 +144,7 @@ feature "Signup feature" do
     page.execute_script "$('#submit_btn').click()"
     expect(page).to have_content("Email is invalid")
     expect(page).to_not have_content("Create admin")
-    expect(current_url).to eq new_user_registration_url
+    expect(current_url).to eq "/users/sign_up"
   end
 
   scenario "Multiple errors are displayed in a list", js: true do
@@ -147,16 +153,14 @@ feature "Signup feature" do
     fill_in "user_username", with: user.username
     fill_in "user_email", with: "gibberish@m"
     fill_in "user_password", with: "12341234"
-    fill_in "user_password_confirmation", with: "532"
+    fill_in "user_password_confirmation", with: "12341234"
     page.execute_script "$('#user_username').trigger('keyup')"
     wait_for_effect_on("#submit_btn")
     page.execute_script "$('#submit_btn').click()"
 
     expect(page).to have_css("#fixed-alert ul")
-    expect(page).to have_selector("#fixed-alert ul li", count: 2)
+    expect(page).to have_selector("#fixed-alert ul li", count: 1)
     expect(page).to have_selector("#fixed-alert ul li", text: "Email is invalid")
-    expect(page).to have_selector("#fixed-alert ul li",
-                                  text: 'Password confirmation doesn\'t match Password')
   end
 
   scenario "Submit Button is disabled on visiting the signup page", js: true do
