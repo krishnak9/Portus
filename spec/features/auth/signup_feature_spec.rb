@@ -163,7 +163,7 @@ feature "Signup feature" do
     page.execute_script "$('#user_password_confirmation').trigger('keyup')"
     wait_for_effect_on("#submit_btn")
     page.execute_script "$('#submit_btn').click()"
-
+    wait_for_effect_on("#submit_btn")
     expect(page).to have_css("#fixed-alert ul")
     expect(page).to have_selector("#fixed-alert ul li", count: 1)
     expect(page).to have_selector("#fixed-alert ul li", text: "Email is invalid")
