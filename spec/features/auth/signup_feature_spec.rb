@@ -52,7 +52,9 @@ feature "Signup feature" do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    click_button("Create account")
+    page.execute_script "$('#user_username').trigger('keyup')"
+    wait_for_effect_on("#submit_btn")
+    page.execute_script "$('#submit_btn').click()"
     expect(page).to have_content("Recent activities")
     expect(page).to have_content("Repositories")
     expect(page).to have_content("Welcome! You have signed up successfully. "\
@@ -70,7 +72,9 @@ feature "Signup feature" do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    click_button("Create account")
+    page.execute_script "$('#user_username').trigger('keyup')"
+    wait_for_effect_on("#submit_btn")
+    page.execute_script "$('#submit_btn').click()"
     expect(page).to have_content("Recent activities")
     expect(page).to have_content("Repositories")
     expect(page).to have_content("Welcome! You have signed up successfully. "\
@@ -126,10 +130,12 @@ feature "Signup feature" do
     visit "/users/sign_up"
     wait_for_effect_on("#new_user")
     fill_in "user_username", with: user.username
-    fill_in "user_email", with: "gibberish"
+    fill_in "user_email", with: "gibberish@m"
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    find_button("#submit_btn")[:disabled].click
+    page.execute_script "$('#user_username').trigger('keyup')"
+    wait_for_effect_on("#submit_btn")
+    page.execute_script "$('#submit_btn').click()"
     expect(page).to have_content("Email is invalid")
     expect(page).to_not have_content("Create admin")
     expect(current_url).to eq new_user_registration_url
@@ -142,7 +148,9 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish@m"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
-    click_button("Create account")
+    page.execute_script "$('#user_username').trigger('keyup')"
+    wait_for_effect_on("#submit_btn")
+    page.execute_script "$('#submit_btn').click()"
 
     expect(page).to have_css("#fixed-alert ul")
     expect(page).to have_selector("#fixed-alert ul li", count: 2)
@@ -163,7 +171,7 @@ feature "Signup feature" do
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
-    page.execute_script "$('#user_username').trigger('focusout')"
+    page.execute_script "$('#user_username').trigger('keyup')"
     wait_for_effect_on("#submit_btn")
     expect(page).to have_button("submit_btn", disabled: true)
   end
@@ -175,7 +183,7 @@ feature "Signup feature" do
     fill_in "user_email", with: user.email
     fill_in "user_password", with: user.password
     fill_in "user_password_confirmation", with: user.password
-    page.execute_script "$('#user_username').trigger('focusout')"
+    page.execute_script "$('#user_username').trigger('keyup')"
     wait_for_effect_on("#submit_btn")
     expect(page).to have_button("submit_btn", disabled: false)
   end
