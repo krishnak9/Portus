@@ -45,6 +45,8 @@ feature "Signup feature" do
   end
 
   scenario "As a guest I am able to signup", js: true do
+    visit "/users/sign_up"
+    wait_for_effect_on("#new_user")
     expect(page).to_not have_content("Create admin")
     fill_in "user_username", with: user.username
     fill_in "user_email", with: user.email
@@ -60,6 +62,8 @@ feature "Signup feature" do
 
   scenario "As a guest I am able to signup with a weird username", js: true do
     username = user.username + "!"
+    visit "/users/sign_up"
+    wait_for_effect_on("#new_user")
 
     expect(page).to_not have_content("Create admin")
     fill_in "user_username", with: username
@@ -119,6 +123,8 @@ feature "Signup feature" do
   end
 
   scenario "As a guest I can see error prohibiting my registration to be completed", js: true do
+    visit "/users/sign_up"
+    wait_for_effect_on("#new_user")
     fill_in "user_username", with: user.username
     fill_in "user_email", with: "gibberish"
     fill_in "user_password", with: user.password
@@ -130,8 +136,10 @@ feature "Signup feature" do
   end
 
   scenario "Multiple errors are displayed in a list", js: true do
+    visit "/users/sign_up"
+    wait_for_effect_on("#new_user")
     fill_in "user_username", with: user.username
-    fill_in "user_email", with: "gibberish"
+    fill_in "user_email", with: "gibberish@m"
     fill_in "user_password", with: "12341234"
     fill_in "user_password_confirmation", with: "532"
     click_button("Create account")
